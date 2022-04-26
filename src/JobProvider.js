@@ -38,6 +38,9 @@ class JobProvider extends Component {
   constructor(props, context) {
     super(props, context)
 
+    this.jobContext = this.props.jobContext || createJobContext()
+    this.rehydrateState = this.props.rehydrateState
+
     // This is a workaround because each element instance of a job needs its
     // own ids.  So between the bootstrapping and the render we need to reset
     // the id counter to ensure the ids will match.
@@ -46,7 +49,7 @@ class JobProvider extends Component {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.jobContext = this.props.jobContext || createJobContext()
     this.rehydrateState = this.props.rehydrateState
   }

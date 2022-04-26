@@ -65,10 +65,6 @@ export default function withJob(config) {
         return serverMode === 'defer' ? false : this.resolveWork(this.props)
       }
 
-      /*
-      * @currently doing: understanding how this block of code here is being executed by the plugin or basically understanding how it works
-      * so that I can properly provide an alternative or permanent fix for this part because componentWillMount is now being deprecated.
-      */
       componentWillMount() {
         let result
 
@@ -100,10 +96,6 @@ export default function withJob(config) {
         this.unmounted = true
       }
 
-      /*
-      * @currently doing: understanding how this block of code here is being executed by the plugin or basically understanding how it works
-      * so that I can properly provide an alternative or permanent fix for this part because componentWillReceiveProps is now being deprecated.
-      */
       componentWillReceiveProps(nextProps) {
         if (
           shouldWorkAgain(

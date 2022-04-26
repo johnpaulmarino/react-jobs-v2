@@ -1,5 +1,6 @@
 import React from 'react'
 
+// eslint-disable-next-line react/prop-types
 export function Foo({ job: { inProgress, result, error } }) {
   if (inProgress) return <div>In progress...</div>
   if (error) return <div>Error: {error.toString()}</div>
