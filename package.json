@@ -1,6 +1,6 @@
 {
   "name": "react-jobs-v2",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Attach asynchronous/synchronous \"jobs\" to your components, with SSR support.",
   "license": "MIT",
   "main": "dist/react-jobs-v2.js",
