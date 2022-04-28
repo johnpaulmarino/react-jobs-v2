@@ -52,9 +52,24 @@ export default function withJob(config) {
         if (context.jobs) {
           id = context.jobs.getNextId()
         }
+
+        let result
+
+        if (context.jobs) {
+          result =
+            env === 'browser'
+              ? context.jobs.getRehydrate(id)
+              : context.jobs.get(id)
+        }
+
+        this.state = {
+          data: result ? result.data : null,
+          error: null,
+          completed: result != null,
+        }
       }
 
-      // @see react-async-bootstrapper
+      // @see react-async-walker
       bootstrap() {
         if (env === 'browser') {
           // No logic for browser, just continue
@@ -65,27 +80,6 @@ export default function withJob(config) {
         return serverMode === 'defer' ? false : this.resolveWork(this.props)
       }
 
-      /*
-       * Currently doing: Investigating again by running the test to figure out where best to put this block of code.
-       * If in constructor or in componentDidMount
-       */
-      componentWillMount() {
-        let result
-
-        if (this.context.jobs) {
-          result =
-            env === 'browser'
-              ? this.context.jobs.getRehydrate(id)
-              : this.context.jobs.get(id)
-        }
-
-        this.setState({
-          data: result ? result.data : null,
-          error: null,
-          completed: result != null,
-        })
-      }
-
       componentDidMount() {
         if (!this.state.completed) {
           this.resolveWork(this.props)
@@ -94,26 +88,22 @@ export default function withJob(config) {
         if (this.context.jobs && env === 'browser') {
           this.context.jobs.removeRehydrate(id)
         }
+        // end of original code
       }
 
       componentWillUnmount() {
         this.unmounted = true
       }
 
-
-      /*
-       * Currently doing: Investigating and researching on what are the best alternatives to componentWillReceiveProps. Currently reading about getDerivedSnapshot method
-       * in react documentation.
-       */
-      componentWillReceiveProps(nextProps) {
+      componentDidUpdate(prevProps) {
         if (
           shouldWorkAgain(
+            propsWithoutInternal(prevProps),
             propsWithoutInternal(this.props),
-            propsWithoutInternal(nextProps),
             this.getJobState(),
           )
         ) {
-          this.resolveWork(nextProps)
+          this.resolveWork(this.props)
         }
       }
 
