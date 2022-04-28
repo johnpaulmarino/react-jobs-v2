@@ -1,9 +1,9 @@
 {
-  "name": "react-jobs-v2",
-  "version": "2.0.1",
+  "name": "react-jobs-v3",
+  "version": "1.0.0",
   "description": "Attach asynchronous/synchronous \"jobs\" to your components, with SSR support.",
   "license": "MIT",
-  "main": "dist/react-jobs-v2.js",
+  "main": "dist/react-jobs-v3.js",
   "files": [
     "*.js",
     "*.md",
