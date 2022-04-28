@@ -65,6 +65,10 @@ export default function withJob(config) {
         return serverMode === 'defer' ? false : this.resolveWork(this.props)
       }
 
+      /*
+       * Currently doing: Investigating again by running the test to figure out where best to put this block of code.
+       * If in constructor or in componentDidMount
+       */
       componentWillMount() {
         let result
 
@@ -96,6 +100,11 @@ export default function withJob(config) {
         this.unmounted = true
       }
 
+
+      /*
+       * Currently doing: Investigating and researching on what are the best alternatives to componentWillReceiveProps. Currently reading about getDerivedSnapshot method
+       * in react documentation.
+       */
       componentWillReceiveProps(nextProps) {
         if (
           shouldWorkAgain(

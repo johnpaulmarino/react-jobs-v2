@@ -35,6 +35,10 @@ class JobProvider extends Component {
     }).isRequired,
   }
 
+  /*
+   * Currently doing: Putting the componentWillMount code inside the constructor is the right choice after getting rid of the
+   * deprecated lifecycle hook
+   */
   constructor(props, context) {
     super(props, context)
 
@@ -49,10 +53,15 @@ class JobProvider extends Component {
     }
   }
 
-  componentDidMount() {
-    this.jobContext = this.props.jobContext || createJobContext()
-    this.rehydrateState = this.props.rehydrateState
-  }
+  /*
+   * Currently doing: found out that alternative for componentWillMount would be componentDidMount or in constructor depending on the use case
+   * since we are only setting a value for this.jobContext and this.rehydrateState via the current props and no actions are performed, putting the code in componentDidMount
+   * is a bad idea.
+   */
+  // componentDidMount() {
+  //   this.jobContext = this.props.jobContext || createJobContext()
+  //   this.rehydrateState = this.props.rehydrateState
+  // }
 
   getChildContext() {
     return {
